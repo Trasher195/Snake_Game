@@ -24,11 +24,17 @@ public class Panel extends JPanel  {
 	
 	private Timer tmDraw,  tmUpdate;
 	
-	private Image Bg, Body, Score, End;
+	public static Image Bg, Body, Score, End;
 	
-	private Image Head_down, Head_left, Head_right, Head_up;
+	public static Image Head_down;
+
+	public static Image Head_left;
+
+	public static Image Head_right;
+
+	public static Image Head_up;
 	
-	private Image Head;
+	public static Image Head;
 	
 	private JLabel LScore;
 	
@@ -42,20 +48,20 @@ public class Panel extends JPanel  {
 			
 		int key = e.getKeyCode();
 		if(key==KeyEvent.VK_LEFT){
-			Logic.napr = 0;
-			Head = Head_left;
+			Logic.new_napr = 0;
+		
 		}
 		else if(key==KeyEvent.VK_UP){
-			Logic.napr = 1;
-			Head = Head_up;
+			Logic.new_napr = 1;
+			
 		}
 		else if(key==KeyEvent.VK_RIGHT){
-			Logic.napr = 2; 
-			Head = Head_right;
+			Logic.new_napr = 2; 
+			
 		}
 		else if(key==KeyEvent.VK_DOWN){
-			Logic.napr = 3;
-			Head = Head_down;
+			Logic.new_napr = 3;
+			
 		}
 		
 		}
@@ -101,6 +107,8 @@ public class Panel extends JPanel  {
 			
 			// End = ImageIO.read(new File("BG.jpg"));
 			
+			Head = Head_left;
+			
 			
 		}catch(Exception ex){}
 		
@@ -111,7 +119,9 @@ public class Panel extends JPanel  {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				Logic.swipeHead();
+				if(Logic.endg==false) {
+					Logic.perem();
+				}
 				LScore.setText("—чет:"+ Logic.score);
 				
 			}
@@ -193,11 +203,19 @@ public class Panel extends JPanel  {
 		for(int i = 0; i<30; i++) {
 			for(int j = 0; j<30; j++) {
 				if(Logic.mas[i][j] != 0) {
+					
+					
 					if(Logic.mas[i][j] != 1) {
 						gr.drawImage(Score, 10+j*20, 10+i*20, 20, 20, null);
 					}
+					
+					
 					else if(Logic.mas[i][j] != -1) {
 						gr.drawImage(Head, 10+j*20, 10+i*20, 20, 20, null);
+					}
+					
+					else if(Logic.mas[i][j]<=2) {
+						gr.drawImage(Body, 10+j*20, 10+i*20, 20, 20, null);
 					}
 				}
 			}

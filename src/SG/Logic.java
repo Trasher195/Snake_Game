@@ -10,6 +10,9 @@ public class Logic {
 	//
 	// ОбЪявление всех переменных
 	//
+	public  boolean endg;
+	private int Long;
+	public int new_napr;
 	public int[][] mas;
 	public int napr;
 	private int gX, gY;
@@ -24,6 +27,16 @@ public class Logic {
 		
 		mas = new int[30][30];
 		
+	}
+	
+	private void rotate() {
+		if(Math.abs((new_napr-napr))!=2) {
+			napr = new_napr;
+			if(napr==0) Panel.Head = Panel.Head_left;
+			else if(napr==1) Panel.Head = Panel.Head_up;
+			else if(napr==2) Panel.Head = Panel.Head_right;
+			else if(napr==3) Panel.Head = Panel.Head_down;
+		}
 	}
 	
 	//
@@ -70,10 +83,16 @@ public class Logic {
 		
 		napr = 0;
 		score = 0;
-		gX = gY = 15;
+		gX = gY = 14;
 		
 		// Создаем змейку по центру
-		mas[15][15]= 1;
+		mas[14][14]= 1;
+		mas[14][15]= 2;
+		mas[14][16]= 3;
+		
+		Long = 3;
+		
+		endg = false;
 		
 		//Создаем "Очко"
 		make_score();
@@ -81,9 +100,9 @@ public class Logic {
 		
 	}
 	
-	public void swipeHead(){
+	public int swipeHead(){
 		
-		mas[gY][gX]=0;
+		
 		
 		// Влево
 		if(napr == 0){
@@ -117,12 +136,48 @@ public class Logic {
 				gY = 0;
 		}
 		
-		if(mas[gY][gX]==-1){
+		int rez = 0;
+		
+		if(mas[gY][gX]==-1) rez=1;
+		
+		else if(mas[gY][gX]==0) rez =2;
+		
+		else if(mas[gY][gX]>0) rez =3;
+		
+		
+			
+		mas[gY][gX] = -2;
+		
+		return rez;
+	}
+	
+	public void perem() {
+		
+		int flag = swipeHead();
+		
+		if(flag==3) endg=true;
+		
+		for(int i = 0; i<30; i++) {
+			for(int j = 0; j<30;j++) {
+				
+				if(mas[i][j]>0) mas[i][j]++;
+				
+				else if(mas[i][j]==-2) mas[i][j]=1;
+				
+				if(flag!=1) {
+					if(mas[i][j]==(Long+1)) mas[i][j]=0;
+				}
+				
+			}
+		}
+		
+		if(flag==1) {
+			Long++;
 			make_score();
 			score += 10;
-			
 		}
-		mas[gY][gX] = 1;
+		
+		rotate();
 	}
 	
 
