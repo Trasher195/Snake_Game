@@ -20,6 +20,10 @@ public class Panel extends JPanel  {
 	
 	
 
+	
+
+	
+
 	private Logic Logic;
 	
 	private Timer tmDraw,  tmUpdate;
@@ -41,6 +45,8 @@ public class Panel extends JPanel  {
 	private JButton Start, Exit;
 	
 	private Panel pan;
+	
+	public Boolean DevStile = false;
 	
 	private class MyKey implements KeyListener{
 		
@@ -103,7 +109,7 @@ public class Panel extends JPanel  {
 			
 			Head_up = ImageIO.read(new File("Snake_head_up.jpg"));
 			
-			Score = ImageIO.read(new File("Snake_Score.jpg"));
+			Score = ImageIO.read(new File("Snake_Score.png"));
 			
 			// End = ImageIO.read(new File("BG.jpg"));
 			
@@ -205,17 +211,20 @@ public class Panel extends JPanel  {
 				if(Logic.mas[i][j] != 0) {
 					
 					
-					if(Logic.mas[i][j] != 1) {
+					if(Logic.mas[i][j] == -1) {
 						gr.drawImage(Score, 10+j*20, 10+i*20, 20, 20, null);
+						
 					}
 					
 					
-					else if(Logic.mas[i][j] != -1) {
+					else if(Logic.mas[i][j] == 1) {
 						gr.drawImage(Head, 10+j*20, 10+i*20, 20, 20, null);
+						
 					}
 					
-					else if(Logic.mas[i][j]<=2) {
+					else if(Logic.mas[i][j] >= 2) {
 						gr.drawImage(Body, 10+j*20, 10+i*20, 20, 20, null);
+						
 					}
 				}
 			}

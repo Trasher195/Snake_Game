@@ -11,7 +11,7 @@ public class Logic {
 	// ОбЪявление всех переменных
 	//
 	public  boolean endg;
-	private int Long;
+	public int Long;
 	public int new_napr;
 	public int[][] mas;
 	public int napr;
@@ -164,7 +164,7 @@ public class Logic {
 				
 				else if(mas[i][j]==-2) mas[i][j]=1;
 				
-				if(flag!=1) {
+				if(flag==2) {
 					if(mas[i][j]==(Long+1)) mas[i][j]=0;
 				}
 				
