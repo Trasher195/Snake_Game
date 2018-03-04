@@ -11,6 +11,7 @@ public class Logic {
 	// ОбЪявление всех переменных
 	//
 	public  boolean endg;
+	public  boolean stop;
 	public int Long;
 	public int new_napr;
 	public int[][] mas;
@@ -93,6 +94,7 @@ public class Logic {
 		Long = 3;
 		
 		endg = false;
+		stop = false;
 		
 		//Создаем "Очко"
 		make_score();
@@ -136,9 +138,14 @@ public class Logic {
 				gY = 0;
 		}
 		
+		
+		
 		int rez = 0;
 		
-		if(mas[gY][gX]==-1) rez=1;
+		if(mas[gY][gX]==-1) {
+			rez=1;
+			System.out.println("rez=1");
+		}
 		
 		else if(mas[gY][gX]==0) rez =2;
 		
@@ -149,9 +156,9 @@ public class Logic {
 		mas[gY][gX] = -2;
 		
 		return rez;
-	}
+		}
 	
-	public void perem() {
+		public void perem() {
 		
 		int flag = swipeHead();
 		
@@ -178,7 +185,13 @@ public class Logic {
 		}
 		
 		rotate();
+	
+
+
+		
+		
 	}
 	
 
 }
+

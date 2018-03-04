@@ -46,13 +46,29 @@ public class Panel extends JPanel  {
 	
 	private Panel pan;
 	
-	public Boolean DevStile = false;
+	public boolean DevStile = false;
+	
+	public final static Color Blaked = new Color(0, 0, 0, 150);
+	
+	
+
 	
 	private class MyKey implements KeyListener{
 		
 		public void keyPressed(KeyEvent e){
 			
 		int key = e.getKeyCode();
+		
+		if(key==KeyEvent.VK_ESCAPE) {
+			
+			if(Logic.stop==false)Logic.stop=true;
+			else if(Logic.stop==true)Logic.stop=false;
+				repaint();
+			System.out.println("PAUSE");
+			}
+			
+		
+		
 		if(key==KeyEvent.VK_LEFT){
 			Logic.new_napr = 0;
 		
@@ -125,7 +141,7 @@ public class Panel extends JPanel  {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(Logic.endg==false) {
+				if(Logic.endg==false && Logic.stop==false) {
 					Logic.perem();
 				}
 				LScore.setText("Счет:"+ Logic.score);
@@ -153,14 +169,15 @@ public class Panel extends JPanel  {
 		LScore = new JLabel("Счет: 0");
 		LScore.setForeground(Color.WHITE);
 		LScore.setFont(new Font("Serif", 0, 30));
-		LScore.setBounds(630, 200, 150, 50);
+		LScore.setBounds(250, 630, 150, 50);
 		
 		add(LScore);
 		
 		Start = new JButton("Новая игра");
 		Start.setForeground(Color.BLUE);
 		Start.setFont(new Font("Serif", 0, 20));
-		Start.setBounds(630,30,150,50);
+		Start.setBounds(250,200,150,50);
+		Start.setVisible(false);
 		Start.addActionListener(new ActionListener() {
 
 			@Override
@@ -169,6 +186,8 @@ public class Panel extends JPanel  {
 				Start.setFocusable(false);
 				Exit.setFocusable(false);
 				pan.setFocusable(true);
+				Frame.Visible=true;
+				
 				
 			}
 
@@ -180,12 +199,16 @@ public class Panel extends JPanel  {
 		Exit = new JButton("Выход");
 		Exit.setForeground(Color.RED);
 		Exit.setFont(new Font("Serif", 0, 20));
-		Exit.setBounds(630,100,150,50);
+		Exit.setBounds(250,300,150,50);
+		Exit.setVisible(false);
 		Exit.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				System.exit(0);
+				Menu menu = new Menu();
+				menu.setVisible(true);
+				
+				Frame.Visible = false;
 				
 			}
 
@@ -202,7 +225,19 @@ public class Panel extends JPanel  {
 		
 		super.paintComponent(gr);
 		
-		gr.drawImage(Bg, 0, 0, 800, 650, null);
+		
+		if(Logic.stop==true) {
+			gr.setColor(Color.BLACK);
+			gr.drawString("PAUSED", 250, 100);
+			Start.setVisible(true);
+			Exit.setVisible(true);
+			System.out.println("Drawed");
+		}else{
+			Start.setVisible(false);
+			Exit.setVisible(false);
+		}
+		gr.setColor(Color.BLACK);
+		gr.drawImage(Bg, 0, 0, 635, 750, null);
 		
 		
 		
@@ -237,6 +272,9 @@ public class Panel extends JPanel  {
 			
 			gr.drawLine(10, 10+i*20, 610, 10+i*20);
 		}
+		
+		
+		
 		
 	}
 
