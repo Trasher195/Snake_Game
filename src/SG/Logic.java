@@ -33,10 +33,7 @@ public class Logic {
 	private void rotate() {
 		if(Math.abs((new_napr-napr))!=2) {
 			napr = new_napr;
-			if(napr==0) Panel.Head = Panel.Head_left;
-			else if(napr==1) Panel.Head = Panel.Head_up;
-			else if(napr==2) Panel.Head = Panel.Head_right;
-			else if(napr==3) Panel.Head = Panel.Head_down;
+			
 		}
 	}
 	

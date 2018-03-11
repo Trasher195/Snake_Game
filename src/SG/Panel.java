@@ -50,6 +50,10 @@ public class Panel extends JPanel  {
 	
 	public final static Color Blaked = new Color(0, 0, 0, 150);
 	
+	public final static Color Blue = new Color(0, 204, 255, 150);
+	
+	public final static Color Red = new Color(153, 0, 0, 150);
+	
 	
 
 	
@@ -111,28 +115,7 @@ public class Panel extends JPanel  {
 		this.addKeyListener(new MyKey());
 		this.setFocusable(true);
 		
-		try {
-			
-			Bg = ImageIO.read(new File("BG.jpg"));
-			
-			Body = ImageIO.read(new File("Snake_body.jpg"));
-			
-			Head_down = ImageIO.read(new File("Snake_head_down.jpg"));
-			
-			Head_left = ImageIO.read(new File("Snake_head_left.jpg"));
-			
-			Head_right = ImageIO.read(new File("Snake_head_right.jpg"));
-			
-			Head_up = ImageIO.read(new File("Snake_head_up.jpg"));
-			
-			Score = ImageIO.read(new File("Snake_Score.png"));
-			
-			// End = ImageIO.read(new File("BG.jpg"));
-			
-			Head = Head_left;
-			
-			
-		}catch(Exception ex){}
+		
 		
 		Logic = new Logic();
 			
@@ -216,8 +199,9 @@ public class Panel extends JPanel  {
 		
 		super.paintComponent(gr);
 		
-		gr.drawImage(Bg, 0, 0, 635, 750, null);
-		
+	
+		gr.setColor(Blue);
+		gr.fillRect(0, 0, 635, 750);
 		
 		
 		
@@ -229,19 +213,22 @@ public class Panel extends JPanel  {
 					
 					
 					if(Logic.mas[i][j] == -1) {
-						gr.drawImage(Score, 10+j*20, 10+i*20, 20, 20, null);
-						
+						gr.setColor(Color.red);
+						gr.fillOval( 10+j*20, 10+i*20, 20, 20);
 					}
 					
 					
 					else if(Logic.mas[i][j] == 1) {
-						gr.drawImage(Head, 10+j*20, 10+i*20, 20, 20, null);
+						gr.setColor(Color.red);
+						gr.fillRect( 10+j*20, 10+i*20, 20, 20);
+						gr.setColor(Color.BLACK);
 						
 					}
 					
 					else if(Logic.mas[i][j] >= 2) {
-						gr.drawImage(Body, 10+j*20, 10+i*20, 20, 20, null);
 						
+						gr.setColor(Color.red);
+						gr.fillRect( 10+j*20, 10+i*20, 20, 20);
 					}
 				}
 			}
