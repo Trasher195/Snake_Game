@@ -15,7 +15,7 @@ import javax.swing.JFrame;
 import javax.swing.Timer;
 
 public class Frame extends JFrame {
-	public static boolean Visible = true;
+	
 	public static Timer tm;
 	
 	
@@ -33,35 +33,25 @@ public class Frame extends JFrame {
 		Container con = getContentPane();
 		con.add(pan);
 		
-		setTitle("Snake Game");
 		
-		Dimension sSize = Toolkit.getDefaultToolkit ().getScreenSize();
 		
-		int vert = sSize.height;
-		int hor  = sSize.width;
+		setVisible(true);
 
-		setBounds(0, 0, 635, 750);
+		setBounds(0, 0, 630, 650);
 		
 		setResizable(false);
 		
-		setUndecorated(false);
+		
 		
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
-		tm = new Timer(1,new ActionListener(){
+		tm = new Timer(100,new ActionListener(){
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				if(Visible==true) {
-					setVisible(true);
-				}
-				else if(Visible==false) {
-					setVisible(false);
-					
-					
-				}
-			
+				
+				setTitle("Snake Game"+" "+"Score:"+" "+ Logic.score);
 				
 			}
 			

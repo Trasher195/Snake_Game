@@ -17,7 +17,7 @@ public class Logic {
 	public int[][] mas;
 	public int napr;
 	private int gX, gY;
-	public int score;
+	public static int score;
 	
 	
 	//

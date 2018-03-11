@@ -144,7 +144,7 @@ public class Panel extends JPanel  {
 				if(Logic.endg==false && Logic.stop==false) {
 					Logic.perem();
 				}
-				LScore.setText("Счет:"+ Logic.score);
+				
 				
 			}
 			
@@ -166,14 +166,9 @@ public class Panel extends JPanel  {
 		
 		setLayout(null);
 		
-		LScore = new JLabel("Счет: 0");
-		LScore.setForeground(Color.WHITE);
-		LScore.setFont(new Font("Serif", 0, 30));
-		LScore.setBounds(250, 630, 150, 50);
 		
-		add(LScore);
 		
-		Start = new JButton("Новая игра");
+		Start = new JButton("New Game");
 		Start.setForeground(Color.BLUE);
 		Start.setFont(new Font("Serif", 0, 20));
 		Start.setBounds(250,200,150,50);
@@ -186,7 +181,7 @@ public class Panel extends JPanel  {
 				Start.setFocusable(false);
 				Exit.setFocusable(false);
 				pan.setFocusable(true);
-				Frame.Visible=true;
+				
 				
 				
 			}
@@ -196,7 +191,7 @@ public class Panel extends JPanel  {
 		add(Start);
 		
 		
-		Exit = new JButton("Выход");
+		Exit = new JButton("Exit");
 		Exit.setForeground(Color.RED);
 		Exit.setFont(new Font("Serif", 0, 20));
 		Exit.setBounds(250,300,150,50);
@@ -205,11 +200,7 @@ public class Panel extends JPanel  {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Menu menu = new Menu();
-				menu.setVisible(true);
-				
-				Frame.Visible = false;
-				
+				System.exit(0);
 			}
 
 		});
@@ -225,19 +216,10 @@ public class Panel extends JPanel  {
 		
 		super.paintComponent(gr);
 		
-		
-		if(Logic.stop==true) {
-			gr.setColor(Color.BLACK);
-			gr.drawString("PAUSED", 250, 100);
-			Start.setVisible(true);
-			Exit.setVisible(true);
-			System.out.println("Drawed");
-		}else{
-			Start.setVisible(false);
-			Exit.setVisible(false);
-		}
-		gr.setColor(Color.BLACK);
 		gr.drawImage(Bg, 0, 0, 635, 750, null);
+		
+		
+		
 		
 		
 		
@@ -272,6 +254,29 @@ public class Panel extends JPanel  {
 			
 			gr.drawLine(10, 10+i*20, 610, 10+i*20);
 		}
+		
+		if(Logic.stop==true || Logic.endg==true) {
+			gr.setColor(Blaked);
+			gr.fillRect(0, 0, 635, 750);
+			gr.setColor(Color.RED);
+			
+				if(Logic.endg==true){
+					gr.setFont(new Font("TimesRoman", Font.BOLD, 35));
+					gr.drawString("Game End", 250, 100);
+					gr.drawString("You Score: "+Logic.score, 225, 150);
+				}else{
+					gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
+					gr.drawString("Paused", 250, 100);
+					
+				}
+			Start.setVisible(true);
+			Exit.setVisible(true);
+			
+		}else{
+			Start.setVisible(false);
+			Exit.setVisible(false);
+		}
+		gr.setColor(Color.BLACK);
 		
 		
 		
