@@ -42,11 +42,11 @@ public class Panel extends JPanel  {
 	
 	private JLabel LScore;
 	
-	private JButton Start, Exit;
+	private JButton Start, Exit, Achievements, Shop, exitshop;
 	
 	private Panel pan;
 	
-	public boolean DevStile = false;
+	public boolean ach, shop;
 	
 	public final static Color Blaked = new Color(0, 0, 0, 150);
 	
@@ -63,6 +63,10 @@ public class Panel extends JPanel  {
 			
 			if(Logic.stop==false)Logic.stop=true;
 			else if(Logic.stop==true)Logic.stop=false;
+			if(shop==true)shop=false;
+		
+			if(ach==true)ach=false;
+			
 				repaint();
 			System.out.println("PAUSE");
 			}
@@ -178,7 +182,11 @@ public class Panel extends JPanel  {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				Logic.Start();
+				shop =false;
+				ach =false;
 				Start.setFocusable(false);
+				Achievements.setVisible(false);
+				Shop.setVisible(false);
 				Exit.setFocusable(false);
 				pan.setFocusable(true);
 				
@@ -191,10 +199,65 @@ public class Panel extends JPanel  {
 		add(Start);
 		
 		
+		Achievements = new JButton("Achievements");
+		Achievements.setForeground(Color.BLUE);
+		Achievements.setFont(new Font("Serif", 0, 20));
+		Achievements.setBounds(250,300,150,50);
+		Achievements.setVisible(false);
+		Achievements.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				ach = true;
+				shop=false;
+				repaint();
+				Start.setFocusable(false);
+				Achievements.setVisible(false);
+				Shop.setVisible(false);
+				Exit.setFocusable(false);
+				pan.setFocusable(true);
+				
+				
+				
+			}
+
+		});
+		
+		add(Achievements);
+		
+		Shop = new JButton("Shop");
+		Shop.setForeground(Color.BLUE);
+		Shop.setFont(new Font("Serif", 0, 20));
+		Shop.setBounds(250,400,150,50);
+		Shop.setVisible(false);
+		Shop.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				shop = true;
+				ach= false;
+				repaint();
+				Start.setFocusable(false);
+				Achievements.setVisible(false);
+				Shop.setVisible(false);
+				Exit.setFocusable(false);
+				pan.setFocusable(true);
+				
+				
+				
+			}
+
+		});
+		
+		add(Shop);
+		
+		
 		Exit = new JButton("Exit");
 		Exit.setForeground(Color.RED);
 		Exit.setFont(new Font("Serif", 0, 20));
-		Exit.setBounds(250,300,150,50);
+		Exit.setBounds(250,500,150,50);
 		Exit.setVisible(false);
 		Exit.addActionListener(new ActionListener() {
 
@@ -206,6 +269,24 @@ public class Panel extends JPanel  {
 		});
 		
 		add(Exit);
+		
+		exitshop = new JButton("Exit on menu");
+		exitshop.setForeground(Color.RED);
+		exitshop.setFont(new Font("Serif", 0, 20));
+		exitshop.setBounds(10,10,150,50);
+		exitshop.setVisible(false);
+		exitshop.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				shop=false;
+				ach=false;
+				exitshop.setVisible(false);
+				
+			}
+
+		});
+		add(exitshop);
 		
 	}
 	
@@ -255,25 +336,61 @@ public class Panel extends JPanel  {
 			gr.drawLine(10, 10+i*20, 610, 10+i*20);
 		}
 		
-		if(Logic.stop==true || Logic.endg==true) {
+		if(Logic.stop==true || Logic.endg==true || shop==true || ach==true) {
 			gr.setColor(Blaked);
 			gr.fillRect(0, 0, 635, 750);
 			gr.setColor(Color.RED);
+			Start.setVisible(true);
+			Achievements.setVisible(true);
+			Shop.setVisible(true);
+			Exit.setVisible(true);
 			
 				if(Logic.endg==true){
 					gr.setFont(new Font("TimesRoman", Font.BOLD, 35));
 					gr.drawString("Game End", 250, 100);
 					gr.drawString("You Score: "+Logic.score, 225, 150);
-				}else{
-					gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
-					gr.drawString("Paused", 250, 100);
-					
 				}
-			Start.setVisible(true);
-			Exit.setVisible(true);
+				else if(Logic.stop==true){
+					String text;
+					text = "Paused";
+					gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
+					if(shop!=true && ach!=true){
+					gr.drawString(text, 250, 100);
+					exitshop.setVisible(false);
+					}
+					
+					if(shop==true){
+						text = "Shop";
+						gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
+						gr.drawString(text, 250, 100);
+						Start.setVisible(false);
+						Achievements.setVisible(false);
+						Shop.setVisible(false);
+						Exit.setVisible(false);
+						exitshop.setVisible(true);
+						
+						
+					}
+					
+					
+					else if(ach==true){
+						text = "Achievements";
+						gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
+						gr.drawString(text, 250, 75);
+						Start.setVisible(false);
+						Achievements.setVisible(false);
+						Shop.setVisible(false);
+						Exit.setVisible(false);
+						exitshop.setVisible(true);
+					}
+				}
+				
+			
 			
 		}else{
 			Start.setVisible(false);
+			Achievements.setVisible(false);
+			Shop.setVisible(false);
 			Exit.setVisible(false);
 		}
 		gr.setColor(Color.BLACK);
