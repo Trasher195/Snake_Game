@@ -11,11 +11,13 @@ public class Logic {
 	// ОбЪявление всех переменных
 	//
 	public  boolean endg;
-	public  boolean stop;
+	public  boolean stop = false;
 	public int Long;
 	public int new_napr;
 	public int[][] mas;
 	public int napr;
+	public static int Money= LoaderSave.LoadSave("Files/Saves/Money.save");
+	
 	private int gX, gY;
 	public static int score;
 	
@@ -145,6 +147,8 @@ public class Logic {
 		if(mas[gY][gX]==-1) {
 			rez=1;
 			System.out.println("rez=1");
+			Money = Money + 2;
+			System.out.println("++  "+ Money);
 		}
 		
 		else if(mas[gY][gX]==0) rez =2;

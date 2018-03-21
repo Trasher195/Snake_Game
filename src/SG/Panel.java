@@ -11,9 +11,10 @@ import java.awt.event.KeyListener;
 import java.io.File;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 public class Panel extends JPanel  {
@@ -22,7 +23,10 @@ public class Panel extends JPanel  {
 
 	
 
-	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8357671655440112980L;
 
 	private Logic Logic;
 	
@@ -40,17 +44,24 @@ public class Panel extends JPanel  {
 	
 	public static Image Head;
 	
-	private JLabel LScore;
+	
 	
 	private JButton Start, Exit, Achievements, Shop, exitshop;
+	
+	
+	public JButton Red, Green, Blue, Spider;
+	
 	
 	private Panel pan;
 	
 	public boolean ach, shop;
 	
+	public String text, Style = "Red";
+	
 	public final static Color Blaked = new Color(0, 0, 0, 150);
 	
-	
+	public static boolean LockBlue, LockGreen, LockSpider;
+
 
 	
 	private class MyKey implements KeyListener{
@@ -66,7 +77,11 @@ public class Panel extends JPanel  {
 			if(shop==true)shop=false;
 		
 			if(ach==true)ach=false;
-			
+			exitshop.setVisible(false);
+			Red.setVisible(false);
+			Green.setVisible(false);
+			Blue.setVisible(false);
+			Spider.setVisible(false);
 				repaint();
 			System.out.println("PAUSE");
 			}
@@ -105,8 +120,53 @@ public class Panel extends JPanel  {
 		}
 		
 	}
+	public void Styles() {
+		int G,B,Sp;
+		G = LoaderSave.LoadSave("Files/Saves/LockGreen.save");
+		B = LoaderSave.LoadSave("Files/Saves/LockBlue.save");
+		Sp = LoaderSave.LoadSave("Files/Saves/LockSpider.save");
+		
+		if(G==1) {
+			LockGreen=true;
+		}else {
+			LockGreen=false;
+		}
+		
+		if(B==1) {
+			LockBlue=true;
+		}else {
+			LockBlue=false;
+		}
+		
+		if(Sp==1) {
+			LockSpider=true;
+		}else {
+			LockSpider=false;
+		}
+		
+	}
 	
-	
+	public void Load() {
+		try {
+			
+			Bg = ImageIO.read(new File("Files/Textures/" + Style + "/BG.jpg"));
+			
+			Body = ImageIO.read(new File("Files/Textures/" + Style + "/Snake_body.jpg"));
+			
+			Head_down = ImageIO.read(new File("Files/Textures/" + Style + "/Snake_head_down.jpg"));
+			
+			Head_left = ImageIO.read(new File("Files/Textures/" + Style + "/Snake_head_left.jpg"));
+			
+			Head_right = ImageIO.read(new File("Files/Textures/" + Style + "/Snake_head_right.jpg"));
+			
+			Head_up = ImageIO.read(new File("Files/Textures/" + Style + "/Snake_head_up.jpg"));
+			
+			Score = ImageIO.read(new File("Files/Textures/" + Style + "/Snake_Score.png"));
+			
+			Head = Head_left;
+			
+		}catch(Exception ex){}
+		}
 	
 	
 	public Panel() {
@@ -115,31 +175,10 @@ public class Panel extends JPanel  {
 		this.addKeyListener(new MyKey());
 		this.setFocusable(true);
 		
-		try {
-			
-			Bg = ImageIO.read(new File("BG.jpg"));
-			
-			Body = ImageIO.read(new File("Snake_body.jpg"));
-			
-			Head_down = ImageIO.read(new File("Snake_head_down.jpg"));
-			
-			Head_left = ImageIO.read(new File("Snake_head_left.jpg"));
-			
-			Head_right = ImageIO.read(new File("Snake_head_right.jpg"));
-			
-			Head_up = ImageIO.read(new File("Snake_head_up.jpg"));
-			
-			Score = ImageIO.read(new File("Snake_Score.png"));
-			
-			// End = ImageIO.read(new File("BG.jpg"));
-			
-			Head = Head_left;
-			
-			
-		}catch(Exception ex){}
 		
 		Logic = new Logic();
-			
+		Load();
+		Styles();
 		Logic.Start();
 		tmUpdate = new Timer(100,new ActionListener(){
 
@@ -281,6 +320,10 @@ public class Panel extends JPanel  {
 			public void actionPerformed(ActionEvent e) {
 				shop=false;
 				ach=false;
+				Red.setVisible(false);
+				Green.setVisible(false);
+				Blue.setVisible(false);
+				Spider.setVisible(false);
 				exitshop.setVisible(false);
 				
 			}
@@ -288,6 +331,84 @@ public class Panel extends JPanel  {
 		});
 		add(exitshop);
 		
+		
+		Red= new JButton("Red");
+		Red.setBounds(75, 120, 100, 100);
+		Red.setIcon(new ImageIcon("Files/Textures/Red/Snake_body.jpg"));
+		Red.setVisible(false);
+		Red.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Style ="Red";
+				Load();
+			}
+			
+		});
+		pan.add(Red);
+		
+		Green = new JButton("Green");
+		Green.setBounds(200, 120, 100, 100);
+		Green.setIcon(new ImageIcon("Files/Textures/Green/Snake_body.jpg"));
+		Green.setVisible(false);
+		Green.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(LockGreen==false) {
+				Style ="Green";
+				}else {
+				Pushare puh = new Pushare("Green Pack", 50);
+				}
+				Load();
+			}
+			
+		});
+		pan.add(Green);
+		
+		
+		Blue = new JButton("Blue");
+		Blue.setBounds(325, 120, 100, 100);
+		Blue.setIcon(new ImageIcon("Files/Textures/Blue/Snake_body.jpg"));
+		Blue.setVisible(false);
+		Blue.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(LockBlue==false) {
+					Style ="Blue";
+				}else {
+					Pushare puh = new Pushare("Blue Pack", 50);
+				}
+				Load();
+			}
+			
+		});
+		pan.add(Blue);
+		
+		
+		
+		Spider = new JButton("Spider");
+		Spider.setBounds(450, 120, 100, 100);
+		Spider.setIcon(new ImageIcon("Files/Textures/Spider/Snake_body.jpg"));
+		Spider.setVisible(false);
+		Red.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				
+				if(LockSpider==false) {
+					Style ="Spider";
+				}else {
+					Pushare puh = new Pushare("Spider Pack", 150);
+				}
+				Load();
+			}
+			
+		});
+		pan.add(Spider);
 	}
 	
 	
@@ -346,9 +467,47 @@ public class Panel extends JPanel  {
 			Exit.setVisible(true);
 			
 				if(Logic.endg==true){
-					gr.setFont(new Font("TimesRoman", Font.BOLD, 35));
-					gr.drawString("Game End", 250, 100);
-					gr.drawString("You Score: "+Logic.score, 225, 150);
+					
+					text = "Game End";
+					
+					gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
+					if(shop!=true && ach!=true){
+					gr.drawString(text, 250, 100);
+					exitshop.setVisible(false);
+					}
+					
+					if(shop==true){
+						text = "Shop";
+						gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
+						gr.drawString(text, 250, 100);
+						Start.setVisible(false);
+						Achievements.setVisible(false);
+						Shop.setVisible(false);
+						Exit.setVisible(false);
+						exitshop.setVisible(true);
+						
+						Red.setVisible(true);
+						Green.setVisible(true);
+						Blue.setVisible(true);
+						Spider.setVisible(true);
+					
+						
+						
+					}
+					
+					
+					else if(ach==true){
+						text = "Achievements";
+						gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
+						gr.drawString(text, 250, 75);
+						Start.setVisible(false);
+						Achievements.setVisible(false);
+						Shop.setVisible(false);
+						Exit.setVisible(false);
+						exitshop.setVisible(true);
+						
+					}
+					
 				}
 				else if(Logic.stop==true){
 					String text;
@@ -369,7 +528,11 @@ public class Panel extends JPanel  {
 						Exit.setVisible(false);
 						exitshop.setVisible(true);
 						
-						
+						Red.setVisible(true);
+						Green.setVisible(true);
+						Blue.setVisible(true);
+						Spider.setVisible(true);
+					
 					}
 					
 					
