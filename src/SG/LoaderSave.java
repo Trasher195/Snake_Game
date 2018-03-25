@@ -8,12 +8,13 @@ import java.util.Scanner;
 
 public class LoaderSave {
 	
-	public static void WriteSave(String PATH, int num) {
+	public static void WriteSave(String PATH, String num) {
 		
 			FileWriter writer;
 			try {
 				writer = new FileWriter(PATH, false);
 				 writer.write(num);  
+				 writer.flush();
 		         writer.close();
 		       
 			} catch (IOException e) {

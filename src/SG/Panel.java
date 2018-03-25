@@ -46,8 +46,8 @@ public class Panel extends JPanel  {
 	
 	
 	
-	private JButton Start, Exit, Achievements, Shop, exitshop;
-	
+	private JButton Start, Exit, Shop, exitshop;
+	//Achievements
 	
 	public JButton Red, Green, Blue, Spider;
 	
@@ -224,7 +224,7 @@ public class Panel extends JPanel  {
 				shop =false;
 				ach =false;
 				Start.setFocusable(false);
-				Achievements.setVisible(false);
+				//Achievements.setVisible(false);
 				Shop.setVisible(false);
 				Exit.setFocusable(false);
 				pan.setFocusable(true);
@@ -238,7 +238,7 @@ public class Panel extends JPanel  {
 		add(Start);
 		
 		
-		Achievements = new JButton("Achievements");
+		/*Achievements = new JButton("Achievements");
 		Achievements.setForeground(Color.BLUE);
 		Achievements.setFont(new Font("Serif", 0, 20));
 		Achievements.setBounds(250,300,150,50);
@@ -264,11 +264,11 @@ public class Panel extends JPanel  {
 		});
 		
 		add(Achievements);
-		
+		*/
 		Shop = new JButton("Shop");
 		Shop.setForeground(Color.BLUE);
 		Shop.setFont(new Font("Serif", 0, 20));
-		Shop.setBounds(250,400,150,50);
+		Shop.setBounds(250,300,150,50);
 		Shop.setVisible(false);
 		Shop.addActionListener(new ActionListener() {
 
@@ -279,7 +279,7 @@ public class Panel extends JPanel  {
 				ach= false;
 				repaint();
 				Start.setFocusable(false);
-				Achievements.setVisible(false);
+				//Achievements.setVisible(false);
 				Shop.setVisible(false);
 				Exit.setFocusable(false);
 				pan.setFocusable(true);
@@ -296,7 +296,7 @@ public class Panel extends JPanel  {
 		Exit = new JButton("Exit");
 		Exit.setForeground(Color.RED);
 		Exit.setFont(new Font("Serif", 0, 20));
-		Exit.setBounds(250,500,150,50);
+		Exit.setBounds(250,400,150,50);
 		Exit.setVisible(false);
 		Exit.addActionListener(new ActionListener() {
 
@@ -394,7 +394,7 @@ public class Panel extends JPanel  {
 		Spider.setBounds(450, 120, 100, 100);
 		Spider.setIcon(new ImageIcon("Files/Textures/Spider/Snake_body.jpg"));
 		Spider.setVisible(false);
-		Red.addActionListener(new ActionListener() {
+		Spider.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -462,7 +462,7 @@ public class Panel extends JPanel  {
 			gr.fillRect(0, 0, 635, 750);
 			gr.setColor(Color.RED);
 			Start.setVisible(true);
-			Achievements.setVisible(true);
+			//Achievements.setVisible(true);
 			Shop.setVisible(true);
 			Exit.setVisible(true);
 			
@@ -481,7 +481,7 @@ public class Panel extends JPanel  {
 						gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
 						gr.drawString(text, 250, 100);
 						Start.setVisible(false);
-						Achievements.setVisible(false);
+						//Achievements.setVisible(false);
 						Shop.setVisible(false);
 						Exit.setVisible(false);
 						exitshop.setVisible(true);
@@ -501,7 +501,7 @@ public class Panel extends JPanel  {
 						gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
 						gr.drawString(text, 250, 75);
 						Start.setVisible(false);
-						Achievements.setVisible(false);
+						//Achievements.setVisible(false);
 						Shop.setVisible(false);
 						Exit.setVisible(false);
 						exitshop.setVisible(true);
@@ -523,7 +523,7 @@ public class Panel extends JPanel  {
 						gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
 						gr.drawString(text, 250, 100);
 						Start.setVisible(false);
-						Achievements.setVisible(false);
+						//Achievements.setVisible(false);
 						Shop.setVisible(false);
 						Exit.setVisible(false);
 						exitshop.setVisible(true);
@@ -541,7 +541,7 @@ public class Panel extends JPanel  {
 						gr.setFont(new Font("TimesRoman", Font.BOLD, 38));
 						gr.drawString(text, 250, 75);
 						Start.setVisible(false);
-						Achievements.setVisible(false);
+						//Achievements.setVisible(false);
 						Shop.setVisible(false);
 						Exit.setVisible(false);
 						exitshop.setVisible(true);
@@ -552,7 +552,7 @@ public class Panel extends JPanel  {
 			
 		}else{
 			Start.setVisible(false);
-			Achievements.setVisible(false);
+			//Achievements.setVisible(false);
 			Shop.setVisible(false);
 			Exit.setVisible(false);
 		}

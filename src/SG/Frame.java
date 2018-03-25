@@ -35,24 +35,25 @@ public class Frame extends JFrame {
 		addWindowListener(new WindowListener() {
 		     // ...
 		     public void windowClosing(WindowEvent event) {
-
-		        LoaderSave.WriteSave("Files/Saves/Money.save", Logic.Money);
+		    	 
+		    	 String m = String.valueOf(Logic.Money);
+		    	LoaderSave.WriteSave("Files/Saves/Money.save", m);
 		        if(Panel.LockBlue==false) {
-		        LoaderSave.WriteSave("Files/Saves/LockBlue.save", 0);
+		        	LoaderSave.WriteSave("Files/Saves/LockBlue.save", "0");
 		        }else {
-		        	LoaderSave.WriteSave("Files/Saves/LockBlue.save", 1);
+		        	LoaderSave.WriteSave("Files/Saves/LockBlue.save", "1");
 		        }
 		        
 		        if(Panel.LockGreen==false) {
-		        LoaderSave.WriteSave("Files/Saves/LockGreen.save", 0);
+		        	LoaderSave.WriteSave("Files/Saves/LockGreen.save", "0");
 		        }else {
-		        	 LoaderSave.WriteSave("Files/Saves/LockGreen.save", 1);
+		        	LoaderSave.WriteSave("Files/Saves/LockGreen.save", "1");
 		        }
 		        
 		        if(Panel.LockSpider) {
-		        	LoaderSave.WriteSave("Files/Saves/LockSpider.save", 0);
+		        	LoaderSave.WriteSave("Files/Saves/LockSpider.save", "0");
 		        }else {
-		        	LoaderSave.WriteSave("Files/Saves/LockSpider.save", 1);
+		        	LoaderSave.WriteSave("Files/Saves/LockSpider.save", "1");
 		        }
 		         System.exit(0);
 		     }
@@ -100,7 +101,7 @@ public class Frame extends JFrame {
 
 		setBounds(0, 0, 630, 650);
 		
-		setResizable(true);
+		setResizable(false);
 		
 		
 		

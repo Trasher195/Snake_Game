@@ -50,7 +50,7 @@ public class Pushare extends JDialog {
 				okButton.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mouseClicked(MouseEvent arg0) {
-						if(Logic.Money<=price) {
+						if(Logic.Money>=price) {
 						Logic.Money=Logic.Money - price;
 						if(product=="Blue Pack") {
 							Panel.LockBlue= false;
